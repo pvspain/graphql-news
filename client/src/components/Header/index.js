@@ -6,8 +6,8 @@ import Logo from '../Svg/logo';
 const Container = styled.div`
   display: flex;
   align-items: center;
-  background-color: #FF6600;
-  padding: .5em;
+  background-color: #E83DC9;
+  padding: 1em;
   justify-content: space-between;
 `;
 
@@ -17,7 +17,7 @@ const NavContainer = styled.div`
 `;
 
 const NavMenu = styled.nav`
-  margin-left: .5em;
+  // margin-left: .5em;
 
   ul {
     list-style: none;
@@ -33,7 +33,7 @@ const NavMenu = styled.nav`
       color: #ffffff;
       opacity: .8;
       font-size: .75em;
-      font-weight: 400;
+      font-weight: bold;
       letter-spacing: .04em;
       text-transform: uppercase;
       text-decoration: none;
@@ -46,7 +46,7 @@ const NavMenu = styled.nav`
 `;
 
 const LoginButton = styled.a`
-  background-color: #343134;
+  background-color: #4A2947;
   color: #ffffff;
   font-size: .75em;
   font-weight: bold;
@@ -58,7 +58,7 @@ const LoginButton = styled.a`
 const Header = () => (
   <Container>
     <NavContainer>
-      <Logo />
+      {/* <Logo /> */}
       <NavMenu>
         <ul>
           <li>

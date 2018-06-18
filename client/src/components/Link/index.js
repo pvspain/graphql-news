@@ -9,7 +9,7 @@ const Title = styled.a`
 
 const Url = styled.a`
   font-size: .8em;
-  color: #848584;
+  color: #9DA7AE;
   margin: 0 0 0 .25em;
 
   a {
@@ -19,9 +19,9 @@ const Url = styled.a`
 `;
 
 const Link = () => (
-  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '.5em 0' }}>
+  <div style={{ display: 'flex', margin: '1em' }}>
     <Score />
-    <div style={{ display: 'inline-flex', flexDirection: 'column' }}>
+    <div style={{ display: 'inline-flex', flexDirection: 'column', justifyContent: 'center' }}>
       <div>
         <Title href="#">Why Skylake CPUs Are Sometimes 50% Slower</Title>
         <Url>
@@ -47,19 +47,19 @@ const ScoreTrigger = styled.div`
 
 const Arrow = styled.span`
   display: inline-block;
-  color: #848584;
+  color: #9DA7AE;
 `;
 
 const ScoreCount = styled.span`
   font-weight: bold;
-  color: #FF6600;
+  color: #E645C7;
   margin: .2em 0;
 `;
 
 const Score = () => (
   <ScoreContainer>
     <ScoreTrigger>
-      <Arrow style={{ color: '#FF6600' }}>▲</Arrow>
+      <Arrow style={{ color: '#E645C7' }}>▲</Arrow>
     </ScoreTrigger>
     <ScoreCount>275</ScoreCount>
     <ScoreTrigger>
@@ -72,7 +72,7 @@ const MetaContainer = styled.div`
   display: flex;
   margin-top: .25em;
   font-size: .8em;
-  color: #848584;
+  color: #9DA7AE;
 
   a {
     &:hover {
