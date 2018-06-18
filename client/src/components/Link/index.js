@@ -19,7 +19,7 @@ const Url = styled.a`
 `;
 
 const Link = () => (
-  <div style={{ display: 'flex', alignItems: 'center' }}>
+  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '.5em 0' }}>
     <Score />
     <div style={{ display: 'inline-flex', flexDirection: 'column' }}>
       <div>
