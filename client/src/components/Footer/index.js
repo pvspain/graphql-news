@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const Wrapper = styled.footer`
   background-color: #BDC9D2;
   color: #ffffff;
-  font-size: .8em;
+  font-size: .7em;
   font-weight: bold;
   letter-spacing: .06em;
   padding: 1em;
@@ -13,17 +13,16 @@ const Wrapper = styled.footer`
 
   a {
     display: inline-block;
-    background-color: #E83DC9;
+    background-color: #385CF7;
     color: inherit;
     text-decoration: none;
-    text-transform: uppercase;
     padding: .8em 1.2em;
   }
 `;
 
 const Footer = () => (
   <Wrapper>
-    <a href="#" style={{ color: '#BDC9D2', backgroundColor: '#9DA7AE' }}>Prev</a>
+    <a href="#" style={{ color: '#BDC9D2', backgroundColor: '#95A3AD' }}>Prev</a>
     <span style={{ display: 'inline-block', margin: '0 1em' }}>1/25</span>
     <a href="#">Next</a>
   </Wrapper>

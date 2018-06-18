@@ -52,14 +52,14 @@ const Arrow = styled.span`
 
 const ScoreCount = styled.span`
   font-weight: bold;
-  color: #E645C7;
+  color: #385CF7;
   margin: .2em 0;
 `;
 
 const Score = () => (
   <ScoreContainer>
     <ScoreTrigger>
-      <Arrow style={{ color: '#E645C7' }}>▲</Arrow>
+      <Arrow style={{ color: '#385CF7' }}>▲</Arrow>
     </ScoreTrigger>
     <ScoreCount>275</ScoreCount>
     <ScoreTrigger>
@@ -76,7 +76,7 @@ const MetaContainer = styled.div`
 
   a {
     &:hover {
-      color: #FF6600;
+      color: #385CF7;
     }
   }
 `;

@@ -6,7 +6,7 @@ import Logo from '../Svg/logo';
 const Container = styled.div`
   display: flex;
   align-items: center;
-  background-color: #E83DC9;
+  background-color: #353940;
   padding: 1em;
   justify-content: space-between;
 `;
@@ -17,7 +17,7 @@ const NavContainer = styled.div`
 `;
 
 const NavMenu = styled.nav`
-  // margin-left: .5em;
+  margin-left: 1em;
 
   ul {
     list-style: none;
@@ -32,11 +32,15 @@ const NavMenu = styled.nav`
     a {
       color: #ffffff;
       opacity: .8;
-      font-size: .75em;
-      font-weight: bold;
+      font-size: .7em;
+      font-weight: 400;
       letter-spacing: .04em;
-      text-transform: uppercase;
       text-decoration: none;
+      transition: all 200ms ease;
+
+      &:hover {
+        opacity: 1;
+      }
     }
 
     &:last-child {
@@ -46,23 +50,23 @@ const NavMenu = styled.nav`
 `;
 
 const LoginButton = styled.a`
-  background-color: #4A2947;
+  background-color: #385CF7;
   color: #ffffff;
   font-size: .75em;
   font-weight: bold;
   letter-spacing: .04em;
   padding: .8em 1.2em;
   text-decoration: none;
-`
+`;
 
 const Header = () => (
   <Container>
     <NavContainer>
-      {/* <Logo /> */}
+      <Logo />
       <NavMenu>
         <ul>
           <li>
-            <a href="#" style={{ opacity: 1 }}>New</a>
+            <a href="#" style={{ opacity: 1, fontWeight: 'bold' }}>New</a>
           </li>
           <li>
             <a href="#">Show</a>
@@ -79,7 +83,7 @@ const Header = () => (
         </ul>
       </NavMenu>
     </NavContainer>
-    <LoginButton href="#">Log In</LoginButton>
+    <LoginButton href="#">Login</LoginButton>
   </Container>
 );
 
