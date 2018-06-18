@@ -18,17 +18,17 @@ const Url = styled.a`
   }
 `;
 
-const Link = () => (
+const Link = ({ author, url, description, comments, score }) => (
   <div style={{ display: 'flex', margin: '1em' }}>
-    <Score />
+    <Score score={score} />
     <div style={{ display: 'inline-flex', flexDirection: 'column', justifyContent: 'center' }}>
       <div>
-        <Title href="#">Why Skylake CPUs Are Sometimes 50% Slower</Title>
+        <Title href="#">{description}</Title>
         <Url>
-          (aloiskraus.wordpress.com)
+          ({url.replace(/(^\w+:|^)\/\//, '')})
         </Url>
       </div>
-      <Meta />
+      <Meta author={author} comments={comments} />
     </div>
   </div>
 );
@@ -54,14 +54,15 @@ const ScoreCount = styled.span`
   font-weight: bold;
   color: #385CF7;
   margin: .2em 0;
+  text-align: center;
 `;
 
-const Score = () => (
+const Score = ({ score }) => (
   <ScoreContainer>
     <ScoreTrigger>
       <Arrow style={{ color: '#385CF7' }}>▲</Arrow>
     </ScoreTrigger>
-    <ScoreCount>275</ScoreCount>
+    <ScoreCount>{score}</ScoreCount>
     <ScoreTrigger>
       <Arrow>▼</Arrow>
     </ScoreTrigger>
@@ -89,10 +90,10 @@ const Anchor = styled.a`
   color: inherit;
 `;
 
-const Meta = () => (
+const Meta = ({ author, comments }) => (
   <MetaContainer>
     <span>
-      by <Anchor href="#">author</Anchor> 3 hours ago
+      by <Anchor href="#">{author}</Anchor> 3 hours ago
     </span>
     <Separator>|</Separator>
     <span>
@@ -100,7 +101,7 @@ const Meta = () => (
     </span>
     <Separator>|</Separator>
     <span>
-      <Anchor href="#">70 comments</Anchor>
+      <Anchor href="#">{comments} comments</Anchor>
     </span>
   </MetaContainer>
 );
