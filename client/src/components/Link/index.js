@@ -1,6 +1,6 @@
-/* eslint-disable */
 import React from 'react';
 import styled from 'styled-components';
+import Score from './Score';
 
 const Title = styled.a`
   color: #34495e;
@@ -8,9 +8,9 @@ const Title = styled.a`
 `;
 
 const Url = styled.a`
-  font-size: .8em;
-  color: #9DA7AE;
-  margin: 0 0 0 .25em;
+  color: #9da7ae;
+  font-size: 0.8em;
+  margin: 0 0 0 0.25em;
 
   a {
     color: inherit;
@@ -18,72 +18,34 @@ const Url = styled.a`
   }
 `;
 
-const Link = ({ author, url, description, comments, score }) => (
+const Link = ({ _id, author, url, description, comments }) => (
   <div style={{ display: 'flex', margin: '1em' }}>
-    <Score score={score} />
+    <Score _id={_id} />
     <div style={{ display: 'inline-flex', flexDirection: 'column', justifyContent: 'center' }}>
       <div>
         <Title href="#">{description}</Title>
-        <Url>
-          ({url.replace(/(^\w+:|^)\/\//, '')})
-        </Url>
+        <Url>({url.replace(/(^\w+:|^)\/\//, '')})</Url>
       </div>
       <Meta author={author} comments={comments} />
     </div>
   </div>
 );
 
-const ScoreContainer = styled.div`
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 1em 0 0;
-`;
-
-const ScoreTrigger = styled.div`
-  font-size: .6em;
-  cursor: pointer;
-`;
-
-const Arrow = styled.span`
-  display: inline-block;
-  color: #9DA7AE;
-`;
-
-const ScoreCount = styled.span`
-  font-weight: bold;
-  color: #385CF7;
-  margin: .2em 0;
-  text-align: center;
-`;
-
-const Score = ({ score }) => (
-  <ScoreContainer>
-    <ScoreTrigger>
-      <Arrow style={{ color: '#385CF7' }}>▲</Arrow>
-    </ScoreTrigger>
-    <ScoreCount>{score}</ScoreCount>
-    <ScoreTrigger>
-      <Arrow>▼</Arrow>
-    </ScoreTrigger>
-  </ScoreContainer>
-);
-
 const MetaContainer = styled.div`
+  color: #9da7ae;
   display: flex;
-  margin-top: .25em;
-  font-size: .8em;
-  color: #9DA7AE;
+  font-size: 0.8em;
+  margin-top: 0.25em;
 
   a {
     &:hover {
-      color: #385CF7;
+      color: #385cf7;
     }
   }
 `;
 
 const Separator = styled.span`
-  margin: 0 .25em;
+  margin: 0 0.25em;
 `;
 
 const Anchor = styled.a`

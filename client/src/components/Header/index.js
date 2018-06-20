@@ -1,19 +1,18 @@
-/* eslint-disable */
 import React from 'react';
 import styled from 'styled-components';
 import Logo from '../Svg/logo';
 
 const Container = styled.div`
-  display: flex;
   align-items: center;
   background-color: #353940;
-  padding: 1em;
+  display: flex;
   justify-content: space-between;
+  padding: 1em;
 `;
 
 const NavContainer = styled.div`
-  display: flex;
   align-items: center;
+  display: flex;
 `;
 
 const NavMenu = styled.nav`
@@ -21,20 +20,20 @@ const NavMenu = styled.nav`
 
   ul {
     list-style: none;
-    padding: 0;
     margin: 0;
+    padding: 0;
   }
 
   li {
     display: inline;
-    margin-right: .75em;
+    margin-right: 0.75em;
 
     a {
       color: #ffffff;
-      opacity: .8;
-      font-size: .7em;
+      font-size: 0.8em;
       font-weight: 400;
-      letter-spacing: .04em;
+      letter-spacing: 0.04em;
+      opacity: 0.8;
       text-decoration: none;
       transition: all 200ms ease;
 
@@ -50,12 +49,12 @@ const NavMenu = styled.nav`
 `;
 
 const LoginButton = styled.a`
-  background-color: #385CF7;
+  background-color: #385cf7;
   color: #ffffff;
-  font-size: .75em;
+  font-size: 0.8em;
   font-weight: bold;
-  letter-spacing: .04em;
-  padding: .8em 1.2em;
+  letter-spacing: 0.04em;
+  padding: 0.8em 1.2em;
   text-decoration: none;
 `;
 
@@ -66,19 +65,15 @@ const Header = () => (
       <NavMenu>
         <ul>
           <li>
-            <a href="#" style={{ opacity: 1, fontWeight: 'bold' }}>New</a>
+            <a href="#" style={{ opacity: 1, fontWeight: 'bold' }}>
+              New
+            </a>
           </li>
           <li>
-            <a href="#">Show</a>
+            <a href="#">Top</a>
           </li>
           <li>
-            <a href="#">Ask</a>
-          </li>
-          <li>
-            <a href="#">Jobs</a>
-          </li>
-          <li>
-            <a href="#">Submit</a>
+            <a href="#">Best</a>
           </li>
         </ul>
       </NavMenu>

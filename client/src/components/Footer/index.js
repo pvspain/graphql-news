@@ -1,28 +1,27 @@
-// /* eslint-disable */
 import React from 'react';
 import styled from 'styled-components';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
 const Wrapper = styled.footer`
-  background-color: #BDC9D2;
+  background-color: #bdc9d2;
   color: #ffffff;
-  font-size: .7em;
+  font-size: 0.7em;
   font-weight: bold;
-  letter-spacing: .06em;
+  letter-spacing: 0.06em;
   padding: 1em;
   text-align: center;
 
   a {
-    display: inline-block;
-    background-color: #385CF7;
+    background-color: #385cf7;
     color: inherit;
+    display: inline-block;
+    padding: 0.8em 1.2em;
     text-decoration: none;
-    padding: .8em 1.2em;
   }
 `;
 
-const Footer = (allLinks) => (
+const Footer = ({ data: { allLinks } }) => (
   <div>
     {allLinks ? (
       <Wrapper>
@@ -30,7 +29,7 @@ const Footer = (allLinks) => (
           Prev
         </a>
         <span style={{ display: 'inline-block', margin: '0 1em' }}>
-          1/{Math.round(allLinks.length / 8).toString()}
+          1/{Math.round(allLinks.length / 5).toString()}
         </span>
         <a href="#">Next</a>
       </Wrapper>
@@ -38,4 +37,10 @@ const Footer = (allLinks) => (
   </div>
 );
 
-export default Footer;
+export default graphql(gql`
+  {
+    allLinks {
+      _id
+    }
+  }
+`)(Footer);

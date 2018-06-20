@@ -9,10 +9,14 @@ import {
   GraphQLList,
 } from 'graphql';
 import { ObjectId } from 'mongodb';
-import { PubSub } from 'graphql-subscriptions';
+import { PubSub, withFilter } from 'graphql-subscriptions';
+import fetch from 'isomorphic-fetch';
 import { linkType, userType, commentsType, provider, signInPayload } from './typeDefs';
+import { buildHeaders } from '../utils/api';
 
 const pubsub = new PubSub();
+
+const baseUrl = process.env.BASE_URL || 'http://localhost:4000';
 
 const linkFilter = new GraphQLInputObjectType({
   name: 'linkFilter',
@@ -140,6 +144,7 @@ const mutationType = new GraphQLObjectType({
           username,
           email: authProvider.email,
           password: authProvider.password,
+          about: null,
         };
         const response = await Users.insert(newUser);
 
@@ -152,15 +157,24 @@ const mutationType = new GraphQLObjectType({
         // We can't sign in a user w/o credentials
         authProvider: { type: new GraphQLNonNull(provider) },
       },
-      resolve: async (_, { authProvider }, { db: { Users } }) => {
-        const user = await Users.findOne({ email: authProvider.email });
+      resolve: async (_, { authProvider }, { db: { Users } }) =>
+        await Users.findOne({ email: authProvider.email }).then(user => {
+          const token = `bearer ${authProvider.email}`;
 
-        if (authProvider.password === user.password) {
-          return { token: `token-${user.email}`, user };
-        }
+          if (authProvider.password.toLowerCase() === user.password.toLowerCase()) {
+            return fetch(`${baseUrl}/login`, {
+              method: 'POST',
+              mode: 'cors',
+              headers: buildHeaders(token),
+              body: JSON.stringify({
+                email: authProvider.email,
+                password: authProvider.password,
+              }),
+            }).then(res => console.log(res.status));
+          }
 
-        return null;
-      },
+          throw new Error('User does not exist!');
+        }),
     },
     upvoteLink: {
       type: linkType,
@@ -173,7 +187,7 @@ const mutationType = new GraphQLObjectType({
 
         const { score } = link.value;
 
-        pubsub.publish('Vote', { 'Vote': { score: score + 1 } }); // eslint-disable-line prettier/prettier
+        pubsub.publish('score', { 'score': { _id, score: score + 1 } }); // eslint-disable-line prettier/prettier
 
         return Links.findOne(ObjectId(_id));
       },
@@ -188,7 +202,7 @@ const mutationType = new GraphQLObjectType({
 
         const { score } = link.value;
 
-        pubsub.publish('Vote', { 'Vote': { score: score - 1 } }); // eslint-disable-line prettier/prettier
+        pubsub.publish('score', { 'score': { _id, score: score - 1 } }); // eslint-disable-line prettier/prettier
 
         return Links.findOne(ObjectId(_id));
       },
@@ -199,9 +213,15 @@ const mutationType = new GraphQLObjectType({
 const subscriptionType = new GraphQLObjectType({
   name: 'Subscription',
   fields: () => ({
-    Vote: {
+    score: {
       type: linkType,
-      subscribe: () => pubsub.asyncIterator('Vote'),
+      args: {
+        _id: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      subscribe: withFilter(
+        () => pubsub.asyncIterator('score'),
+        (payload, variables) => payload.score._id === variables._id
+      ),
     },
   }),
 });
