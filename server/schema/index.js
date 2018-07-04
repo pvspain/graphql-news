@@ -7,6 +7,7 @@ import {
   GraphQLList,
 } from 'graphql';
 import { ObjectId } from 'mongodb';
+import { compareSync, hashSync } from 'bcrypt';
 import { linkType, userType, commentsType, provider, signInPayload } from './typeDefs';
 
 const queryType = new GraphQLObjectType({
@@ -92,10 +93,13 @@ const mutationType = new GraphQLObjectType({
         authProvider: { type: new GraphQLNonNull(provider) },
       },
       resolve: async (_, { username, authProvider }, { db: { Users } }) => {
+        // encrypt password
+        const password = hashSync(authProvider.password, 10);
+
         const newUser = {
           username,
           email: authProvider.email,
-          password: authProvider.password,
+          password,
         };
         const response = await Users.insert(newUser);
 
@@ -111,8 +115,10 @@ const mutationType = new GraphQLObjectType({
       resolve: async (_, { authProvider }, { db: { Users } }) => {
         const user = await Users.findOne({ email: authProvider.email });
 
-        if (authProvider.password === user.password) {
-          return { token: `token-${user.email}`, user };
+        if (user) {
+          if (compareSync(authProvider.password, user.password)) {
+            return { token: `token-${user.email}`, user };
+          }
         }
 
         return null;
