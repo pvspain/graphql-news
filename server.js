@@ -18,6 +18,7 @@ const typeDefs = `
 
 const links = [
     { id: 0, url: 'https://google.com', description: 'Google' },
+    { id: 1, url: 'https://github.com', description: 'GitHub' }
 ]
 
 // const schema = buildSchema(`
