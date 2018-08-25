@@ -4,15 +4,31 @@ import graphqlHTTP from 'express-graphql';
 
 const app = express();
 
-const schema = buildSchema(`
-    type Query {
-        hello: String
+const typeDefs = `
+    type Link {
+        id: ID!
+        url: String!
+        description: String!
     }
-`);
 
-const root = {
-    hello: () => 'Hello, World!'
- };
+    type Query {
+        links: [Link]!
+    }
+`;
+
+const links = [
+    { id: 0, url: 'https://google.com', description: 'Google' },
+]
+
+// const schema = buildSchema(`
+//     type Query {
+//         hello: String
+//     }
+// `);
+
+// const root = {
+//     hello: () => 'Hello, World!'
+//  };
 
 app.use('/graphql', graphqlHTTP({
     schema,
