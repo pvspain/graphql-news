@@ -1,1 +1,16 @@
-console.log('Hello, our server will go here!');
+import { buildSchema, graphql } from 'graphql';
+
+const schema = buildSchema(`
+    type Query {
+        hello: String
+    }
+`);
+
+const root = {
+    hello: () => 'Hello, World!'
+ };
+
+ graphql(schema, '{ hello }', root).then(response => {
+     console.log(response);
+ });
+ 
