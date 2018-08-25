@@ -22,4 +22,4 @@ app.use('/graphql', graphqlHTTP({
 
 app.listen(4000);
 
-console.log('Server up and runnign on localhost:4000/graphql');
+console.log('Server up and running on localhost:4000/graphql');
