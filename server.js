@@ -1,4 +1,8 @@
 import { buildSchema, graphql } from 'graphql';
+import express from 'express';
+import graphqlHTTP from 'express-graphql';
+
+const app = express();
 
 const schema = buildSchema(`
     type Query {
@@ -10,7 +14,12 @@ const root = {
     hello: () => 'Hello, World!'
  };
 
- graphql(schema, '{ hello }', root).then(response => {
-     console.log(response);
- });
- 
+app.use('/graphql', graphqlHTTP({
+    schema,
+    rootValue: root,
+    graphql: true
+}));
+
+app.listen(4000);
+
+console.log('Server up and runnign on localhost:4000/graphql');
