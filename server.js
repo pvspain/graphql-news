@@ -1,18 +1,29 @@
 import express from 'express';
 import graphqlHTTP from 'express-graphql';
 import { makeExecutableSchema } from 'graphql-tools';
+import { find } from 'lodash';
 
 const app = express();
 
+// Construct a schema, using GraphQL schema language
 const typeDefs = `
     type Link {
-        id: ID!
+        id: Int! @unique
         url: String!
         description: String!
     }
 
+    type User {
+        id: Int! @unique
+        username: String!
+        about: String
+    }
+
     type Query {
-        links: [Link!]!
+        allLinks: [Link]
+        link(id: Int!): Link
+        allUsers: [User]
+        user(id: Int!): User 
     }
 `;
 
@@ -21,9 +32,17 @@ const links = [
     { id: 1, url: 'https://github.com', description: 'GitHub' }
 ];
 
+const users = [
+    { id: 0, username: 'user1', about: 'The first user'},
+    { id: 1, username: 'user2', about: 'The second user'}
+];
+
 const resolvers = {
     Query: {
-        links: () => links,
+        allLinks: () => links,
+        link: (_, { id }) => find(links, { id }),
+        allUsers: () => users,
+        user: (_, { id }) => find(users, { id }),
     },
 };
 
