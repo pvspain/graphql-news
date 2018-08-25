@@ -1,6 +1,6 @@
-import { buildSchema, graphql } from 'graphql';
 import express from 'express';
 import graphqlHTTP from 'express-graphql';
+import {makeExecutableSchema } from 'graphql-tools';
 
 const app = express();
 
@@ -12,30 +12,32 @@ const typeDefs = `
     }
 
     type Query {
-        links: [Link]!
+        links: [Link!]!
     }
 `;
 
 const links = [
     { id: 0, url: 'https://google.com', description: 'Google' },
     { id: 1, url: 'https://github.com', description: 'GitHub' }
-]
+];
 
-// const schema = buildSchema(`
-//     type Query {
-//         hello: String
-//     }
-// `);
+const resolvers = {
+    Query: {
+        links: () => links,
+    },
+};
 
-// const root = {
-//     hello: () => 'Hello, World!'
-//  };
+const schema = makeExecutableSchema({
+    typeDefs,
+    resolvers
+});
 
-app.use('/graphql', graphqlHTTP({
-    schema,
-    rootValue: root,
-    graphql: true
-}));
+app.use(
+    '/graphql',
+    graphqlHTTP({
+        schema,
+        graphql: true
+    }));
 
 app.listen(4000);
 
