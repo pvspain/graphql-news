@@ -8,6 +8,7 @@
 - [Modularising the schema][4]
 - [Info argument in resolver functions][5]
 - [Nodemon documentation][6]
+- [graphql/type module][7]
 
 [1]: https://github.com/skevy/graphiql-app
 [2]: https://github.com/facebook/graphql/pull/90
@@ -15,3 +16,4 @@
 [4]: https://www.apollographql.com/docs/graphql-tools/generate-schema.html#modularizing
 [5]: https://graphql.org/graphql-js/type/#graphqlobjecttype
 [6]: https://github.com/remy/nodemon#nodemon
+[7]: https://graphql.org/graphql-js/type/
